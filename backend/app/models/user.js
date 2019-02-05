@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: "É necessário informar um Nome"
+          msg: "Nome é obrigatório"
         }
       }
     },
@@ -20,12 +20,30 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
+        notEmpty: {
+          msg: "E-mail é obrigatório"
+        },
         isEmail: {
           msg: "É necessário informar um e-mail válido"
+        },
+        async isUnique(email) {
+          const user = await User.find({ where: { email } });
+
+          if (user) {
+            throw new Error(`O E-mail ${email} já está em uso`);
+          }
         }
       }
     },
-    password: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Senha é obrigatória"
+        }
+      }
+    },
     createdAt: DataTypes.NOW,
     updatedAt: DataTypes.NOW
   });
