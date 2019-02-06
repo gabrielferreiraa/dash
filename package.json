@@ -1,0 +1,13 @@
+{
+	"name": "dash",
+	"private": true,
+	"workspaces": ["packages/*"],
+	"scripts": {
+		"server": "yarn workspace @dash/server start",
+		"web": "yarn workspace @dash/web start",
+		"dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\""
+	},
+	"devDependencies": {
+		"concurrently": "^4.1.0"
+	}
+}
