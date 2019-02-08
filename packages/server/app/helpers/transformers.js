@@ -1,5 +1,3 @@
-const errorResponse = errors => {
-  return errors.map(error => error.message);
-};
+const errorResponse = errors => errors.map(error => error.message || error.msg);
 
 export default { errorResponse };
