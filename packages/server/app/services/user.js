@@ -9,4 +9,6 @@ const update = (id, data) => {
 	return Repository.update(id, data)(User);
 };
 
-export default { all, add, update };
+const destroy = id => Repository.destroy(id)(User);
+
+export default { all, add, update, destroy };

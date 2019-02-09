@@ -8,9 +8,14 @@ const update = (id, data) => Model =>
 		returning: true
 	});
 
+const destroy = id => Model =>
+	Model.destroy({
+		where: { id }
+	});
+
 const findBy = (field, value) => Model =>
 	Model.findAll({
 		[field]: value
 	});
 
-export default { all, add, update, findBy };
+export default { all, add, update, destroy, findBy };

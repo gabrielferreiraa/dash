@@ -34,4 +34,17 @@ const update = async (req, res) => {
 	}
 };
 
-export default { all, add, update };
+const destroy = async (req, res) => {
+	try {
+		const user = await User.destroy(req.params.userId);
+
+		return res.json(user);
+	} catch (err) {
+		console.log(err);
+		const errors = transformers.errorResponse(err.errors);
+
+		return res.status(400).send({ errors });
+	}
+};
+
+export default { all, add, update, destroy };
