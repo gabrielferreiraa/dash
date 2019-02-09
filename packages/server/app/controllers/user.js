@@ -3,7 +3,9 @@ import { User } from '../services';
 
 const all = async (req, res) => {
 	try {
-		const users = await User.all();
+		const page = req.query.page || 1;
+
+		const users = await User.all(page);
 		return res.json(users);
 	} catch (err) {
 		const errors = transformers.errorResponse(err.errors);
