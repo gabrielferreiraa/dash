@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './app/routes';
-import expressValidator from 'express-validator';
 
 const app = express();
 const port = 4000;
@@ -12,7 +11,6 @@ app.use(
 		extended: true
 	})
 );
-app.use(expressValidator());
 app.use('/', routes);
 
 app.listen(port, () => {
