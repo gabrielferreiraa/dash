@@ -1,7 +1,7 @@
 import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
-import routes from './app/routes';
+import routes from '@routes';
 
 const app = express();
 const port = 4000;

@@ -1,5 +1,5 @@
-import transformers from '../helpers/transformers';
-import { User } from '../services';
+import transformers from '@helpers/transformers';
+import { User } from '@services';
 
 const all = async (req, res) => {
 	try {

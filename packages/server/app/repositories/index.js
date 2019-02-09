@@ -17,11 +17,16 @@ const destroy = id => Model =>
 		where: { id }
 	});
 
-const findBy = (field, value) => Model =>
+const findAllBy = (field, value) => Model =>
 	Model.findAll({
 		[field]: value
 	});
 
+const findFirstBy = (field, value) => Model =>
+	Model.findOne({
+		where: { [field]: value }
+	});
+
 const findAndCountAll = () => Model => Model.findAndCountAll();
 
-export default { all, add, update, destroy, findBy, findAndCountAll };
+export default { all, add, update, destroy, findAllBy, findAndCountAll, findFirstBy };

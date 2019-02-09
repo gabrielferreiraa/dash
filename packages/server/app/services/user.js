@@ -24,10 +24,10 @@ const add = async data => {
 	return user.dataValues;
 };
 
-const update = (id, data) => {
-	return Repository.update(id, data)(User);
-};
+const update = (id, data) => Repository.update(id, data)(User);
 
 const destroy = id => Repository.destroy(id)(User);
 
-export default { all, add, update, destroy };
+const getUser = email => Repository.findFirstBy('email', email)(User);
+
+export default { all, add, update, destroy, getUser };
