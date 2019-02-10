@@ -5,6 +5,8 @@
 	"scripts": {
 		"server": "yarn workspace @dash/server start",
 		"web": "yarn workspace @dash/web start",
+		"setup": "yarn workspaces run install",
+		"upg": "yarn upgrade-interactive",
 		"dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\""
 	},
 	"devDependencies": {
