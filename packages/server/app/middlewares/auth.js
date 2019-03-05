@@ -1,4 +1,4 @@
-import { Auth } from '@services';
+import { Auth } from '../services';
 
 const auth = (req, res, next) => {
 	const token = req.headers.authorization;

@@ -1,4 +1,4 @@
-import { Auth } from '@services';
+import { Auth } from '../services';
 
 const encryptPass = async user => {
 	if (user.changed('password')) {

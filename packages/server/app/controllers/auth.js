@@ -1,5 +1,5 @@
-import transformers from '@helpers/transformers';
-import { Auth, User } from '@services';
+import transformers from '../helpers/transformers';
+import { Auth, User } from '../services';
 
 const signIn = async (req, res) => {
 	try {
