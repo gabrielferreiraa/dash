@@ -1,4 +1,5 @@
 import { Auth } from '../services';
+import userMessages from '../helpers/messages/users';
 
 const encryptPass = async user => {
 	if (user.changed('password')) {
@@ -29,14 +30,14 @@ export default (sequelize, DataTypes) => {
 			defaultValue: '',
 			unique: {
 				args: true,
-				msg: 'Este e-mail já está em uso'
+				msg: userMessages.emailAlreadyInUse
 			},
 			validate: {
 				notEmpty: {
-					msg: 'E-mail não pode ser vazio'
+					msg: userMessages.emailCantBeEmpty
 				},
 				isEmail: {
-					msg: 'É necessário informar um e-mail válido'
+					msg: userMessages.emailIsInvalid
 				}
 			}
 		},
@@ -45,7 +46,7 @@ export default (sequelize, DataTypes) => {
 			allowNull: false,
 			validate: {
 				notEmpty: {
-					msg: 'Senha é obrigatória'
+					msg: userMessages.passwordIsRequired
 				}
 			}
 		},

@@ -1,52 +1,36 @@
-import transformers from '../helpers/transformers';
 import { User } from '../services';
+import userMessages from '../helpers/messages/users';
+import tryAwait from '../tools/try-await';
 
 const all = async (req, res) => {
-	try {
-		const page = req.query.page || 1;
+	const page = req.query.page || 1;
 
-		const users = await User.all(page);
-		return res.json(users);
-	} catch (err) {
-		const errors = transformers.errorResponse(err.errors);
-
-		return res.status(400).send({ errors });
-	}
+	tryAwait(User.all(page), {
+		try: data => res.json(data),
+		catch: (err, code) => res.status(code).send(err),
+		fallback: userMessages.notPossibleList
+	});
 };
 
-const add = async (req, res) => {
-	try {
-		const user = await User.add(req.body);
-		return res.json(user);
-	} catch (err) {
-		const errors = transformers.errorResponse(err.errors);
+const add = (req, res) =>
+	tryAwait(User.add(req.body), {
+		try: data => res.json(data),
+		catch: (err, code) => res.status(code).send(err),
+		fallback: userMessages.notPossibleAdd
+	});
 
-		return res.status(400).send({ errors });
-	}
-};
+const update = ({ params, body }, res) =>
+	tryAwait(User.update(params.userId, body), {
+		try: data => res.json(data),
+		catch: (err, code) => res.status(code).send(err),
+		fallback: userMessages.notPossibleUpdate
+	});
 
-const update = async (req, res) => {
-	try {
-		const user = await User.update(req.params.userId, req.body);
-		return res.json(user);
-	} catch (err) {
-		const errors = transformers.errorResponse(err.errors);
-
-		return res.status(400).send({ errors });
-	}
-};
-
-const destroy = async (req, res) => {
-	try {
-		const user = await User.destroy(req.params.userId);
-
-		return res.json(user);
-	} catch (err) {
-		console.log(err);
-		const errors = transformers.errorResponse(err.errors);
-
-		return res.status(400).send({ errors });
-	}
-};
+const destroy = async ({ params }, res) =>
+	tryAwait(User.destroy(params.userId), {
+		try: data => res.json(data),
+		catch: (err, code) => res.status(code).send(err),
+		fallback: userMessages.notPossibleDelete
+	});
 
 export default { all, add, update, destroy };
