@@ -60,8 +60,8 @@ export default (sequelize, DataTypes) => {
 		});
 	};
 
-	User.hook('beforeCreate', encryptPass);
-	User.hook('beforeUpdate', encryptPass);
+	User.addHook('beforeCreate', encryptPass);
+	User.addHook('beforeUpdate', encryptPass);
 
 	return User;
 };
