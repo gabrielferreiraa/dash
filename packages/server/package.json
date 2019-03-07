@@ -6,14 +6,12 @@
 	"author": "Gabriel Ferreira <gabriel@lightup.com.br>",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon --exec babel-node index.js",
+		"start": "DEBUG=express:* nodemon --exec babel-node index.js",
 		"migrate": "node_modules/.bin/sequelize db:migrate"
 	},
 	"dependencies": {
 		"@sentry/node": "^4.6.4",
 		"aws-sdk": "^2.415.0",
-		"babel-cli": "^6.26.0",
-		"babel-preset-env": "^1.7.0",
 		"bcrypt": "^3.0.4",
 		"body-parser": "^1.18.3",
 		"compression": "^1.7.3",
@@ -27,7 +25,9 @@
 		"uuid": "^3.3.2"
 	},
 	"devDependencies": {
+		"babel-cli": "^6.26.0",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"babel-preset-env": "^1.7.0",
 		"nodemon": "^1.18.10",
 		"sequelize-cli": "^5.4.0"
 	}
