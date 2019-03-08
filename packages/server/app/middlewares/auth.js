@@ -1,6 +1,11 @@
 import { Auth } from '../services';
 import authMessages from '../helpers/messages/auth';
 
+/**
+ * Middleware responsável por validar o login de usuário.
+ * => Valida e a requisição possui um token
+ * => Valida se o token é válido
+ */
 const auth = async (req, res, next) => {
 	const token = req.headers.authorization;
 
