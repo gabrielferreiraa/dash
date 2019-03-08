@@ -1,4 +1,4 @@
-import { Auth } from '../services';
+import Auth from '../services/auth';
 import authMessages from '../helpers/messages/auth';
 
 /**

@@ -3,9 +3,7 @@ import storageMessages from '../helpers/messages/storage';
 const upload = async ({ file }, res) => {
 	try {
 		if (!file) {
-			return res.status(400).send({
-				message: 'Arquivo não encontrado'
-			});
+			return res.status(400).send(storageMessages.fileNotFound);
 		}
 
 		return res.json({

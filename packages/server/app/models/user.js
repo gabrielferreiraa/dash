@@ -1,4 +1,4 @@
-import { Auth } from '../services';
+import Auth from '../services/auth';
 import userMessages from '../helpers/messages/users';
 
 const encryptPass = async user => {
@@ -50,8 +50,14 @@ export default (sequelize, DataTypes) => {
 				}
 			}
 		},
-		createdAt: DataTypes.NOW,
-		updatedAt: DataTypes.NOW
+		createdAt: {
+			type: DataTypes.DATE,
+			defaultValue: DataTypes.NOW
+		},
+		updatedAt: {
+			type: DataTypes.DATE,
+			defaultValue: DataTypes.NOW
+		}
 	});
 
 	User.prototype.toJSON = function() {

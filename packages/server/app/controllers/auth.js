@@ -1,11 +1,12 @@
-import { Auth, User } from '../services';
+import service from '../services/user';
+import Auth from '../services/auth';
 import authMessages from '../helpers/messages/auth';
 
 const signIn = async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
-		const user = await User.getUser(email);
+		const user = await service.getUser(email);
 
 		if (!user) {
 			return res.status(404).send(authMessages.userNotFound);

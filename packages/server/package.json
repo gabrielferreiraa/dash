@@ -7,7 +7,9 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "DEBUG=express:* nodemon --exec babel-node index.js",
-		"migrate": "node_modules/.bin/sequelize db:migrate"
+		"migrate": "node_modules/.bin/sequelize db:migrate",
+		"migrate:rollback": "node_modules/.bin/sequelize db:migrate:undo",
+		"seed": "node_modules/.bin/sequelize db:seed:all"
 	},
 	"dependencies": {
 		"@sentry/node": "^4.6.4",
