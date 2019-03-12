@@ -1,10 +1,20 @@
 import Auth from '../services/auth';
+import Email from '../services/email';
 import userMessages from '../helpers/messages/users';
 
 const encryptPass = async user => {
 	if (user.changed('password')) {
 		user.password = await Auth.hash(user.password);
 	}
+};
+
+const sendWelcomeEmail = async data => {
+	return Email.send({
+		data,
+		template: 'welcome',
+		subject: `${data.name.split(' ').shift()}, seja bem-vindo(a)`,
+		to: data.email
+	});
 };
 
 export default (sequelize, DataTypes) => {
@@ -67,7 +77,10 @@ export default (sequelize, DataTypes) => {
 		});
 	};
 
-	User.addHook('beforeCreate', encryptPass);
+	User.addHook('beforeCreate', user => {
+		encryptPass(user);
+		sendWelcomeEmail(user);
+	});
 	User.addHook('beforeUpdate', encryptPass);
 
 	return User;
