@@ -2,7 +2,9 @@ import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import routes from './app/routes';
-import Sentry from './app/tools/sentry';
+import * as Sentry from '@sentry/node';
+
+Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 const app = express();
 const port = 4000;
