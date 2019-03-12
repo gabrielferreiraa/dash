@@ -7,9 +7,11 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "DEBUG=express:* nodemon --exec babel-node index.js",
-		"migrate": "node_modules/.bin/sequelize db:migrate",
-		"migrate:rollback": "node_modules/.bin/sequelize db:migrate:undo",
-		"seed": "node_modules/.bin/sequelize db:seed:all"
+		"sequelize": "sequelize $*",
+		"migrate": "yarn sequelize db:migrate",
+		"migrate:rollback": "yarn sequelize db:migrate:undo",
+		"seed": "yarn sequelize db:seed:all",
+		"seed:rollback": "yarn sequelize db:seed:undo:all"
 	},
 	"dependencies": {
 		"@sentry/node": "^4.6.4",
@@ -28,6 +30,8 @@
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
+		"babel-core": "^6.26.3",
+		"babel-plugin-add-module-exports": "^1.0.0",
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
 		"nodemon": "^1.18.10",

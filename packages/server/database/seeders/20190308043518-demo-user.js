@@ -1,20 +1,15 @@
 'use strict';
+require('dotenv').config();
+import { User } from '../../app/models';
+import Repository from '../../app/repositories';
 
-module.exports = {
-	up: (queryInterface, Sequelize) => {
-		return queryInterface.bulkInsert(
-			'Users',
-			[
-				{
-					name: 'Gabriel Ferreira',
-					email: 'hi.gabrielferreira@gmail.com',
-					password: '$2b$10$riQcYYLTRJHmtnb/hhQmc.mXRT4XE77.muoo/9Ve0L3YvNliCFsLm'
-				}
-			],
-			{}
-		);
-	},
-
+export default {
+	up: () =>
+		Repository.add({
+			name: process.env.SEEDER_USER_NAME,
+			email: process.env.SEEDER_USER_EMAIL,
+			password: process.env.SEEDER_USER_PASS
+		})(User),
 	down: (queryInterface, Sequelize) => {
 		return queryInterface.bulkDelete('Users', null, {});
 	}
